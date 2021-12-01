@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="adminhtml.cache.grid">
+            <arguments>
+                <argument name="id" xsi:type="string">cache_grid</argument>
+                <argument name="dataSource" xsi:type="object">Mgt\Varnish\Model\Cache\ResourceModel\Grid\Collection</argument>
+                <argument name="pager_visibility" xsi:type="string">0</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mgt_waf>
+            <rate_limit>
+                <rate_limit>500</rate_limit>
+            </rate_limit>
+            <backend_access>
+                <is_enabled>0</is_enabled>
+                <whitelisted_ips></whitelisted_ips>
+            </backend_access>
+        </mgt_waf>
+    </default>
+</config>

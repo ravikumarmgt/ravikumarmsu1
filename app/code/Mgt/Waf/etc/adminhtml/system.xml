@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <tab id="mgtcommerce" translate="label" sortOrder="100">
+            <label><![CDATA[Mgt-Commerce.com]]></label>
+        </tab>
+        <section id="mgt_waf" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>mgt_waf</class>
+            <label>Web Application Firewall</label>
+            <tab>mgtcommerce</tab>
+            <resource>Magento_Catalog::config_devtool</resource>
+            <group id="settings" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Settings</label>
+                <field id="aws_access_key" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>AWS Access Key</label>
+                </field>
+                <field id="aws_secret_access_key" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>AWS Secret Access Key</label>
+                </field>
+                <field id="aws_region" translate="label" type="select" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>AWS Region</label>
+                    <source_model>Mgt\Waf\Model\Config\Source\AwsRegion</source_model>
+                </field>
+                <field id="project_name" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Project Name</label>
+                </field>
+            </group>
+            <group id="blocked_countries" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Blocked Countries</label>
+                <field id="country_codes" translate="label" type="multiselect" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Blocked Countries</label>
+                    <source_model>Mgt\Waf\Model\Config\Source\BlockedCountries</source_model>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\BlockedCountries</backend_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+            <group id="blocked_ips" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Blocked IPs</label>
+                <field id="blocked_ips" translate="label comment" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Blocked IPs</label>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\BlockedIps</backend_model>
+                    <comment>One IP address (IPv4 or IPv6) per line.</comment>
+                </field>
+            </group>
+            <group id="blocked_bots" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Blocked Bots</label>
+                <field id="blocked_bots" translate="label comment" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Blocked Bots</label>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\BlockedBots</backend_model>
+                    <comment>One Bot per line.</comment>
+                </field>
+            </group>
+            <group id="rate_limit" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Rate Limit</label>
+                <field id="rate_limit" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Rate Limit</label>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\RateLimit</backend_model>
+                    <comment>The rate limit is the maximum number of requests from a single IP address that are allowed in a five-minute period. This value is continually evaluated, and requests will be blocked once this limit is reached. The IP address is automatically unblocked after it falls below the limit.</comment>
+                </field>
+                <field id="whitelisted_ips" translate="label comment" type="textarea" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Whitelisted IPs</label>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\RateLimitWhitelistedIps</backend_model>
+                    <comment>List of IPs that will not be blocked e.g. your office IP(s). One IP address (IPv4 or IPv6) per line.</comment>
+                </field>
+            </group>
+            <group id="magento_backend" translate="label" type="text" sortOrder="600" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Magento Backend IP Restriction</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelisted_ips" translate="label comment" type="textarea" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Whitelisted IPs</label>
+                    <backend_model>Mgt\Waf\Model\Config\BackendModel\MagentoBackendWhitelistedIps</backend_model>
+                    <comment>List of IPs that should have access to the Magento Backend. One IP address (IPv4 or IPv6) per line.</comment>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

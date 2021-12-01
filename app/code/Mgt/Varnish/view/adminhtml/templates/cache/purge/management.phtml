@@ -1,0 +1,70 @@
+<?php
+
+$websites = $block->getWebsites();
+$singlePurgeActionUrl  = $block->getSinglePurgeActionUrl();
+
+?>
+
+<div class="mgt-varnish-cache-management">
+  <h2>
+    <span><?php echo __('MGT Varnish Cache Management') ?></span>
+  </h2>
+  <div class="mgt-varnish-cache-purge-container">
+    <table>
+      <thead>
+        <tr>
+          <th><?php echo __('Store Purging') ?></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php foreach ($websites as $website): ?>
+        <?php $websiteGroups = $website->getGroups(); ?>
+        <?php foreach ($websiteGroups as $group): ?>
+          <?php $stores = $block->getStores($group); ?>
+          <?php if (count($stores)): ?>
+            <tr class="mgt-varnish-cache-purge-grid-website">
+              <td colspan="2"><?php echo $group->getName(); ?></td>
+            </tr>
+            <?php foreach ($stores as $store): ?>
+              <?php
+                $storeBaseUrl = $block->getStoreBaseUrl($store);
+                $storePurgeUrl = $block->getStorePurgeUrl($store);
+              ?>
+              <tr class="mgt-varnish-cache-purge-grid-store">
+                <td>
+                  <?php echo $store->getName(); ?> <br>
+                  <span>(<?php echo $storeBaseUrl; ?>)</span>
+                </td>
+                <td width="210">
+                  <button onclick="setLocation('<?php echo $storePurgeUrl; ?>')" type="button">Purge Varnish Cache</button>
+                </td>
+              </tr>
+            <?php endforeach ?>
+          <?php endif ?>
+        <?php endforeach ?>
+      <?php endforeach ?>
+      </tbody>
+    </table>
+    <form method="get" action="<?php echo $singlePurgeActionUrl; ?>">
+      <table>
+        <thead>
+          <tr>
+            <th><?php echo __('Single Url Purge') ?></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="url" name="url" placeholder="https://www.domain.com/category.html">
+            </td>
+            <td width="210">
+              <button type="submit">Purge Single Url</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<?php
+
+$showCronNotRunningMessage = $block->showCronNotRunningMessage();
+$cronJobCommand = $block->getCronJobCommand();
+
+?>
+
+<?php if (true === $showCronNotRunningMessage): ?>
+<div class="mgt-varnish-cron-warning-container">
+  <div class="message message-warning warning">
+    <strong><?php echo __('MGT Varnish Cache Warmer Cron Job is not running!'); ?></strong>
+    <br><br>
+    <?php echo __('Run the following Cron Job every minute'); ?>:
+    <br><br>
+    <?php echo $cronJobCommand; ?>
+  </div>
+</div>
+<?php endif ?>

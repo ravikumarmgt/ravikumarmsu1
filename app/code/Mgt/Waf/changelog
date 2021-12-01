@@ -1,0 +1,5 @@
+1.0.1 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com> Wed, 29 July 2020 08:08:08
+- Don't include AWS SDK as phar as it's already shipped by Magento 2.5
+
+1.0.0 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com> Sat, 08 Feb 2020 08:08:08
+- Initial Version

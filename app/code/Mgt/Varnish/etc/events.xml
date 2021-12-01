@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_postdispatch_adminhtml_system_config_save">
+        <observer name="flush_all_pagecache" instance="Magento\PageCache\Observer\InvalidateCache" disabled="true"/>
+    </event>
+    <event name="adminhtml_cache_flush_system">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\FlushAllCacheObserver" disabled="true"/>
+    </event>
+    <event name="clean_media_cache_after">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\FlushAllCacheObserver" disabled="true"/>
+    </event>
+    <event name="clean_catalog_images_cache_after">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\FlushAllCacheObserver" disabled="true"/>
+    </event>
+    <event name="assigned_theme_changed">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\InvalidateVarnishObserver" disabled="true"/>
+    </event>
+    <event name="catalogrule_after_apply">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\InvalidateVarnishObserver" disabled="true"/>
+    </event>
+    <event name="adminhtml_cache_refresh_type">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\FlushAllCacheObserver"/>
+    </event>
+    <event name="adminhtml_cache_flush_all">
+        <observer name="flush_varnish_pagecache" instance="Magento\CacheInvalidate\Observer\FlushAllCacheObserver"/>
+    </event>
+    <event name="clean_cache_by_tags">
+        <observer name="invalidate_varnish" instance="Mgt\Varnish\Model\Observer\InvalidateObserver"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="mgt_varnish_product_save_after" instance="Mgt\Varnish\Model\Observer\ProductSaveAfterObserver"/>
+    </event>
+</config>
