@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="mgt_feed_admin_notification" instance="Mgt\Varnish\Model\Observer\PredispatchAdminActionControllerObserver"/>
+    </event>
+    <event name="admin_system_config_changed_section_mgt_varnish">
+        <observer name="mgt_varnish_save_config" instance="Mgt\Varnish\Model\Observer\SaveConfigObserver"/>
+    </event>
+</config>

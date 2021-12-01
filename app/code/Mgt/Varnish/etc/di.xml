@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\FrontControllerInterface">
+        <plugin name="front-controller-varnish-cache" type="Magento\PageCache\Model\App\FrontController\VarnishPlugin" disabled="true"/>
+    </type>
+    <type name="Magento\Framework\Controller\ResultInterface">
+        <plugin name="result-varnish-cache" type="Magento\PageCache\Model\Controller\Result\VarnishPlugin" disabled="false"/>
+    </type>
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="mgt-varnish-layout-plugin" type="Mgt\Varnish\Model\Plugin\LayoutPlugin"/>
+        <plugin name="layout-model-caching-unique-name" type="Magento\PageCache\Model\Layout\LayoutPlugin" disabled="true"/>
+    </type>
+    <type name="Mgt\Varnish\Model\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Mgt\Varnish\Model\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">mgt-varnish-logger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Mgt\Varnish\Model\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mgtVarnishCacheWarmer" xsi:type="object">Mgt\Varnish\Console\Command\CacheWarmerCommand</item>
+                <item name="mgtVarnishFillQueue" xsi:type="object">Mgt\Varnish\Console\Command\FillQueueCommand</item>
+                <item name="mgtVarnishFlushQueue" xsi:type="object">Mgt\Varnish\Console\Command\FlushQueueCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\CacheInvalidate\Model\PurgeCache" type="Mgt\Varnish\Model\Plugin\PurgeCachePlugin"/>
+    <preference for="Magento\CacheInvalidate\Observer\InvalidateVarnishObserver" type="Mgt\Varnish\Model\Observer\InvalidateObserver"/>
+</config>

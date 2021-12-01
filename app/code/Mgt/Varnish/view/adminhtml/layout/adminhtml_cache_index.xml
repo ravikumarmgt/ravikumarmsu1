@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mgt\Varnish\Block\Adminhtml\Cache\Purge\Management" name="mgt_varnish.purge_management" before="cache.additional" template="Mgt_Varnish::cache/purge/management.phtml"/>
+            <block class="Mgt\Varnish\Block\Adminhtml\Cache\Queue\Information" name="mgt_varnish.queue_information" after="mgt_varnish.purge_management" template="Mgt_Varnish::cache/queue/information.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

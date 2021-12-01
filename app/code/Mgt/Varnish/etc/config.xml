@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mgt_varnish>
+            <module>
+                <server_list>127.0.0.1:6081</server_list>
+                <server_port>6081</server_port>
+                <debug_mode>0</debug_mode>
+                <excluded_urls><![CDATA[
+my-url.html
+]]></excluded_urls>
+                <excluded_routes><![CDATA[
+checkout
+catalogsearch
+product_compare
+customer
+paypal
+wishlist]]></excluded_routes>
+                <excluded_params><![CDATA[___store,___SID,SID]]></excluded_params>
+                <api_secret_key>secret-123</api_secret_key>
+                <default_cache_lifetime>15552000</default_cache_lifetime>
+                <routes_cache_lifetime><![CDATA[{"_1510243955194_194":{"field1":"cms_index_index","field2":"15552000","field3":"Homepage"},"_1510244053737_737":{"field1":"catalog_category_view","field2":"15552000","field3":"Category Page"},"_1510244054228_228":{"field1":"catalog_product_view","field2":"15552000","field3":"Product Detail Page"},"_1510244057611_611":{"field1":"cms_page_view","field2":"15552000","field3":"CMS Site"}}]]></routes_cache_lifetime>
+                <cache_warmer_enabled>0</cache_warmer_enabled>
+                <cache_warmer_routes><![CDATA[
+catalog_category_view
+catalog_product_view
+cms_index_index
+cms_page_view]]></cache_warmer_routes>
+                <cache_warmer_threads>1</cache_warmer_threads>
+                <cache_warmer_cpu_limit_enabled>1</cache_warmer_cpu_limit_enabled>
+                <cache_warmer_cpu_limit>40</cache_warmer_cpu_limit>
+            </module>
+        </mgt_varnish>
+    </default>
+</config>

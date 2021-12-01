@@ -1,0 +1,38 @@
+<?php
+
+$isCacheWarmerEnabled = $block->isCacheWarmerEnabled();
+$queueInformationAjaxUrl = $block->getQueueInformationAjaxUrl();
+
+?>
+
+<?php if (true === $isCacheWarmerEnabled): ?>
+
+<div class="mgt-varnish-cache-queue-information">
+  <h3>
+    <span><?php echo __('MGT Varnish Cache Warmer Queue') ?></span>
+  </h3>
+  <strong><?php echo __('Urls In Queue'); ?>: <span id="number-of-urls-in-queue">0</span></strong>
+  <div id="mgt-varnish-cache-queue-container" class="mgt-varnish-cache-queue-container">
+  </div>
+</div>
+
+<script type="text/javascript">
+  require(['jquery'], function(jQuery){
+//<![CDATA[
+    function loadCrawledUrls() {
+      jQuery.getJSON("<?php echo $queueInformationAjaxUrl; ?>", function() {})
+        .done(function(data) {
+           jQuery('#number-of-urls-in-queue').html(data.numberOfUrls);
+           jQuery('#mgt-varnish-cache-queue-container').html(data.content);
+        });
+    }
+    jQuery(document).ready(function() {
+      loadCrawledUrls();
+    });
+    setInterval(function(){loadCrawledUrls();}, 5000);
+//]]>
+
+  });
+</script>
+
+<?php endif ?>
